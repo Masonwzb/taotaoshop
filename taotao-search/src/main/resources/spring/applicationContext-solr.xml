@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+   <!-- bean definitions here -->
+
+	<!-- 配置SolrServer对象 -->
+	<!-- 单机版 -->
+	<bean id="httpSolrClient" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+       <!--注入的是连接地址-->
+		<constructor-arg name="builder" value="${SOLR_SERVER_URL}"></constructor-arg>	
+       <!--注入连接的超时的时间-->
+		<property name="connectionTimeout" value="${SOLR_CONNTIMEOUT}"></property>
+		
+		<!--配置这个数据的解析器--> 
+       <property name="parser">
+          <bean class="org.apache.solr.client.solrj.impl.XMLResponseParser"></bean>
+       </property>
+	</bean>
+	
+</beans>
